@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultimas Notícias - IFSP</title>
+  </head>
+  <body style="margin: 0; padding: 0; background-color: white; font-family: Arial, sans-serif;">
+    <div style="background-color: #a8cd89;border-radius: 10px; max-width: 600px; margin: 20px auto; padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+      <header style="text-align: center; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;">
+        <h1 style="margin: 0; font-size: 20px; color: #000;">Últimas notícias - IFSP</h1>
+        <p style="margin: 0; font-size: 12px; color: #444;">Campus: Caraguatatuba</p>
+      </header>
+      <main>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+
+          <!-- Renderização dinâmica com Jinja2 -->
+          {% for item in values %}
+          <li style="margin-bottom: 20px; background-color: #FEFEFC ; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div style="display: flex; align-items: center;">
+              <div style="width: 40%; text-align: left;">
+                <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.4;">
+                  <b>Por:</b> {{ item.author }}<br />
+                  <b>Em:</b> {{ item.date }}<br />
+                  <b>Categoria:</b> {{ item.category }}
+                </p>
+              </div>
+              <hr style="height: 5rem;margin-right: 1rem;">
+              <div style="width: 60%; text-align: left;">
+                <h2 style="margin: 0 0 10px; font-size: 14px; color: #333;">{{ item.abstract }}</h2>
+                <p style="margin: 0 0 10px; font-size: 12px; color: #555; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                  {{ item.description }}
+                </p>
+                <a href="{{ item.link }}" target="_blank" style="font-size: 12px; color: #008cba; text-decoration: none;">Saiba mais</a>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

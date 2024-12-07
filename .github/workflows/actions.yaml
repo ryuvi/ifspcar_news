@@ -1,0 +1,44 @@
+name: Send emails
+
+on:
+  push:
+    branches:
+      - main  # Executa o workflow quando há push na branch "main"
+  workflow_dispatch:  # Permite execução manual do workflow
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checkout do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Passo 2: Configurar o Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # Define a versão do Python
+
+      # Passo 3: Instalar dependências
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Certifique-se de ter um arquivo requirements.txt
+
+      # Passo 4: Configurar variável de ambiente (senha de app)
+      - name: Set environment variables
+        env:
+          PSWD_APP: ${{ secrets.PSWD_APP }}
+          SENDER: ${{ secrets.SENDER }}
+          RECIPIENTS: ${{ secrets.RECIPIENTS }}
+        run: echo "Environment variable configured"
+
+      # Passo 5: Executar o script
+      - name: Run Python script
+        env:
+          PSWD_APP: ${{ secrets.PSWD_APP }}
+          SENDER: ${{ secrets.SENDER }}
+          RECIPIENTS: ${{ secrets.RECIPIENTS }}
+        run: python main.py
