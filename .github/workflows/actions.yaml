@@ -2,7 +2,7 @@ name: Send emails
 
 on:
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "0 9 * * 1-5"
   workflow_dispatch:  # Permite execução manual do workflow
 
 jobs:
