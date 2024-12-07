@@ -1,9 +1,8 @@
 name: Send emails
 
 on:
-  push:
-    branches:
-      - main  # Executa o workflow quando há push na branch "main"
+  schedule:
+    - cron: "0 9 * * *"
   workflow_dispatch:  # Permite execução manual do workflow
 
 jobs:
